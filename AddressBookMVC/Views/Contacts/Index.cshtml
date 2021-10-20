@@ -1,0 +1,123 @@
+﻿@model AddressBookMVC.Models.ViewModels.ContactIndexViewModel
+@inject IImageService imageService
+@using AddressBookMVC.Services.Interfaces
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col">
+        <form method="post" asp-controller="Contacts" asp-action="SearchContacts">
+            <input type="text" name="searchString" class="form-control" placeholder="Search..."/>
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col">
+        <form method="post" asp-controller="Contacts" asp-action="FilterContacts">
+            <select name="categoryId" class="form-select" asp-items="Model.CategoryFilter">
+            <option>Select a Category</option>
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+               LastName
+            </th>
+            <th>
+               Birthday
+            </th>
+            <th>
+               Address1
+            </th>
+            <th>
+               Address2
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+               ZipCode
+            </th>
+            <th>
+               Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+               Created
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contacts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Photo" class="img-fluid" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FullName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
