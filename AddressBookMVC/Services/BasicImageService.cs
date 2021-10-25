@@ -10,27 +10,9 @@ namespace AddressBookMVC.Services
 {
     public class BasicImageService : IImageService
     {
-        public string ContentType(IFormFile file)
-        {
-            if (file is null)
-            {
-                return null;
-            }
-            return file.ContentType;
-        }
-
-        public string DecodeImage(byte[] data, string type)
-        {
-         if (data is null || type is null)
-            {
-                return null;
-            }
-            return $"data:{type};base64,{Convert.ToBase64String(data)}";
-        }
-
         public async Task<byte[]> EncodeImageAsync(IFormFile file)
         {
-         if (file is null)
+            if (file is null)
             {
                 return null;
             }
@@ -44,6 +26,25 @@ namespace AddressBookMVC.Services
         {
             var file = $"{Directory.GetCurrentDirectory()}/wwwroot/img/(fileName)";
             return await File.ReadAllBytesAsync(file);
+        }
+
+        public string DecodeImage(byte[] data, string type)
+        {
+            if (data is null || type is null)
+            {
+                return null;
+            }
+            return $"data:{type};base64,{Convert.ToBase64String(data)}";
+        }
+
+        public string ContentType(IFormFile file)
+        {
+            if (file is null)
+            {
+                return null;
+            }
+
+            return file.ContentType;
         }
 
         public int Size(IFormFile file)
