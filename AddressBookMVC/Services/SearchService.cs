@@ -20,7 +20,7 @@ namespace AddressBookMVC.Services
 
         public IEnumerable<Contact> SearchContacts(string searchString, string userId)
         {
-            var result = _context.Contacts.Include(c => c.UserId == userId).AsQueryable();
+            var result = _context.Contacts.Where(c => c.UserId == userId).AsQueryable();
 
             if (searchString is not null)
             {

@@ -11,65 +11,49 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<div class="row row-cols-1 row-cols-md-2">
+<div class="row glass-style darkGlass p-2 pt-4 row-cols-1 row-cols-md-2">
     <div class="col">
         <form method="post" asp-controller="Contacts" asp-action="SearchContacts">
-            <input type="text" name="searchString" class="form-control" placeholder="Search..."/>
+            <input type="text" name="searchString" class="form-control" placeholder="Search..." />
             <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
     </div>
     <div class="col">
         <form method="post" asp-controller="Contacts" asp-action="FilterContacts">
             <select name="categoryId" class="form-select" asp-items="Model.CategoryFilter">
-            <option>Select a Category</option>
+                <option>Select a Category</option>
             </select>
             <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
     </div>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                FirstName
-            </th>
-            <th>
-               LastName
-            </th>
-            <th>
-               Birthday
-            </th>
-            <th>
-               Address1
-            </th>
-            <th>
-               Address2
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                State
-            </th>
-            <th>
-               ZipCode
-            </th>
-            <th>
-               Email
-            </th>
-            <th>
-                Phone
-            </th>
-            <th>
-               Created
-            </th>
-            <th>
-                Image
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    LastName
+                </th>
+                <th>
+                    Address1
+                </th>
+                <th>
+                    Address2
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    State
+                </th>
+                <th>
+                    Image
+                </th>
+                <th></th>
+            </tr>
+        </thead>
         @foreach (var item in Model.Contacts)
         {
             <tr>
@@ -78,9 +62,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Birthday)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address1)
@@ -95,19 +76,7 @@
                     @Html.DisplayFor(modelItem => item.State)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ZipCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Created)
-                </td>
-                <td>
-                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Photo" class="img-fluid" />
+                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Photo" class="img-fluid" width="100" height="100"/>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.FullName)
@@ -119,5 +88,6 @@
                 </td>
             </tr>
         }
-    </tbody>
-</table>
+
+    </table>
+    </div>
